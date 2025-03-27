@@ -1,0 +1,30 @@
+name: flutter_mcp_server
+description: Flutter implementation of Model Context Protocol (MCP) server for exposing data and functionality to MCP clients
+version: 0.1.4
+homepage: https://github.com/app-appplayer/flutter_mcp_server
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mcp_server: ^0.1.1
+  flutter_mcp_common: ^0.0.1
+  #  path: ../flutter_mcp_common
+  shared_preferences: ^2.5.2
+  provider: ^6.0.5
+  rxdart: ^0.27.7
+  equatable: ^2.0.5
+  uuid: ^4.0.0
+  logger: ^2.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  mockito: ^5.4.2
+  build_runner: ^2.4.6
+
+flutter:
