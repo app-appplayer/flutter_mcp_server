@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   mcp_server: ^0.1.1
   flutter_mcp_common: ^0.0.1
   #  path: ../flutter_mcp_common
@@ -28,3 +30,19 @@ dev_dependencies:
   build_runner: ^2.4.6
 
 flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.appplayer.flutter_mcp_server
+        pluginClass: FlutterMcpServerPlugin
+      ios:
+        pluginClass: FlutterMcpServerPlugin
+      web:
+        pluginClass: FlutterMcpServerWeb
+        fileName: flutter_mcp_server_web.dart
+      macos:
+        pluginClass: FlutterMcpServerPlugin
+      windows:
+        pluginClass: FlutterMcpServerPluginCApi
+      linux:
+        pluginClass: FlutterMcpServerPlugin
