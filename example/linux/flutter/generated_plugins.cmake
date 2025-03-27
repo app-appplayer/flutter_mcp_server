@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  flutter_mcp_common
+  flutter_mcp_server
   flutter_secure_storage_linux
 )
 
