@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mcp_server/mcp_server.dart';
-import 'package:flutter_mcp_common/flutter_mcp_common.dart' hide LogLevel;
+import 'package:flutter_mcp_common/flutter_mcp_common.dart';
 import 'package:uuid/uuid.dart';
 
 import 'flutter_mcp_server_config.dart';
