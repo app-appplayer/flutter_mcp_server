@@ -101,11 +101,11 @@ abstract class FileResourceProvider extends FlutterMcpResourceProvider {
   }
   
   /// Get file content for a resource
-  Future<_FileContent> getFileContent(String uri, Map<String, dynamic>? params);
+  Future<FileContent> getFileContent(String uri, Map<String, dynamic>? params);
 }
 
 /// Helper class for file content results
-class _FileContent {
+class FileContent {
   /// File content as string
   final String content;
   
@@ -113,7 +113,7 @@ class _FileContent {
   final String mimeType;
   
   /// Create file content result
-  _FileContent({
+  FileContent({
     required this.content,
     required this.mimeType,
   });
@@ -139,11 +139,11 @@ abstract class ImageResourceProvider extends FlutterMcpResourceProvider {
   }
   
   /// Get image information for a resource
-  Future<_ImageInfo> getImageInfo(String uri, Map<String, dynamic>? params);
+  Future<ImageInfo> getImageInfo(String uri, Map<String, dynamic>? params);
 }
 
 /// Helper class for image information
-class _ImageInfo {
+class ImageInfo {
   /// Image URL
   final String url;
   
@@ -154,7 +154,7 @@ class _ImageInfo {
   final String description;
   
   /// Create image information
-  _ImageInfo({
+  ImageInfo({
     required this.url,
     required this.mimeType,
     required this.description,
