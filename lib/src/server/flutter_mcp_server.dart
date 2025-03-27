@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mcp_server/mcp_server.dart';
-import 'package:flutter_mcp_common/flutter_mcp_common.dart';
+import 'package:flutter_mcp_common/flutter_mcp_common.dart' hide LogLevel;
 import 'package:uuid/uuid.dart';
 
 import 'flutter_mcp_server_config.dart';
@@ -193,7 +193,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
       _setServerState(ServerState.running);
       
       // Send log message
-      _server.sendLog(LogLevel.info, 'Server started');
+      _server.sendLog(McpLogLevel.info, 'Server started');
       
     } catch (e) {
       // Update state
@@ -222,7 +222,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
     
     // Send log message
     if (_serverState == ServerState.running) {
-      _server.sendLog(LogLevel.info, 'Server stopping');
+      _server.sendLog(McpLogLevel.info, 'Server stopping');
     }
     
     // Disconnect from transport
@@ -297,7 +297,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
   }
   
   /// Send a log message
-  void sendLog(LogLevel level, String message, {String? logger, Map<String, dynamic>? data}) {
+  void sendLog(McpLogLevel level, String message, {String? logger, Map<String, dynamic>? data}) {
     if (_serverState == ServerState.running) {
       _server.sendLog(level, message, logger: logger, data: data);
     }
@@ -360,7 +360,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
     
     if (_serverState == ServerState.running) {
       _server.sendLog(
-        LogLevel.debug, 
+        McpLogLevel.debug,
         'Server resource usage adjusted',
         data: {'mode': mode.toString()},
       );
@@ -429,7 +429,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
   void _pauseServer() {
     if (_serverState == ServerState.running) {
       _setServerState(ServerState.paused);
-      _server.sendLog(LogLevel.info, 'Server paused');
+      _server.sendLog(McpLogLevel.info, 'Server paused');
     }
   }
   
@@ -437,7 +437,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
   void _resumeServer() {
     if (_serverState == ServerState.paused) {
       _setServerState(ServerState.running);
-      _server.sendLog(LogLevel.info, 'Server resumed');
+      _server.sendLog(McpLogLevel.info, 'Server resumed');
     }
   }
   
