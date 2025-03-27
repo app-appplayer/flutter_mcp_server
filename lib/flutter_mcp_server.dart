@@ -32,4 +32,5 @@ FlutterMcpNetworkManager,
 NetworkQuality,
 FlutterMcpNotificationManager,
 FlutterMcpSecureStorage,
-AppResourceMode;
+AppResourceMode,
+Logger;
