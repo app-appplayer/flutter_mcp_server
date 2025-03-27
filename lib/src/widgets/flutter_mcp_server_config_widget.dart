@@ -30,7 +30,7 @@ class FlutterMcpServerConfigWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FlutterMcpServerConfigWidgetState createState() => _FlutterMcpServerConfigWidgetState();
+  State<FlutterMcpServerConfigWidget> createState() => _FlutterMcpServerConfigWidgetState();
 }
 
 class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWidget> {
@@ -61,9 +61,9 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
   /// Save configuration to preferences
   Future<void> _saveConfig() async {
     await _config.save();
-    
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Configuration saved')),
+      const SnackBar(content: Text('Configuration saved')),
     );
   }
   
@@ -107,8 +107,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
       'Basic Settings',
       [
         SwitchListTile(
-          title: Text('Run in Background'),
-          subtitle: Text('Keep server running when app is in background'),
+          title: const Text('Run in Background'),
+          subtitle: const Text('Keep server running when app is in background'),
           value: _config.runInBackground,
           onChanged: (value) {
             _updateConfig(_config.copyWith(runInBackground: value));
@@ -116,8 +116,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
         ),
         
         ListTile(
-          title: Text('Max Concurrent Requests'),
-          subtitle: Text('Maximum number of requests to process simultaneously'),
+          title: const Text('Max Concurrent Requests'),
+          subtitle: const Text('Maximum number of requests to process simultaneously'),
           trailing: DropdownButton<int>(
             value: _config.maxConcurrentRequests,
             items: [1, 3, 5, 10, 15, 20].map((value) {
@@ -135,8 +135,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
         ),
         
         ListTile(
-          title: Text('Request Handler Timeout'),
-          subtitle: Text('Maximum time allowed for request handlers'),
+          title: const Text('Request Handler Timeout'),
+          subtitle: const Text('Maximum time allowed for request handlers'),
           trailing: DropdownButton<int>(
             value: _config.requestHandlerTimeout.inSeconds,
             items: [5, 10, 30, 60, 120, 300].map((value) {
@@ -161,15 +161,15 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
   /// Build advanced settings section
   Widget _buildAdvancedSettings() {
     if (!_showAdvancedSettings) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
     
     return _buildSettingsSection(
       'Advanced Settings',
       [
         SwitchListTile(
-          title: Text('Monitor Resource Usage'),
-          subtitle: Text('Track and report resource usage statistics'),
+          title: const Text('Monitor Resource Usage'),
+          subtitle: const Text('Track and report resource usage statistics'),
           value: _config.monitorResourceUsage,
           onChanged: (value) {
             _updateConfig(_config.copyWith(monitorResourceUsage: value));
@@ -177,8 +177,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
         ),
         
         ListTile(
-          title: Text('Resource Stats Update Interval'),
-          subtitle: Text('How often to update resource statistics'),
+          title: const Text('Resource Stats Update Interval'),
+          subtitle: const Text('How often to update resource statistics'),
           trailing: DropdownButton<int>(
             value: _config.resourceStatsUpdateIntervalSeconds,
             items: [1, 3, 5, 10, 30, 60].map((value) {
@@ -198,8 +198,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
         ),
         
         SwitchListTile(
-          title: Text('Use Android Foreground Service'),
-          subtitle: Text('Run as a foreground service on Android'),
+          title: const Text('Use Android Foreground Service'),
+          subtitle: const Text('Run as a foreground service on Android'),
           value: _config.useAndroidForegroundService,
           onChanged: (value) {
             _updateConfig(_config.copyWith(useAndroidForegroundService: value));
@@ -207,8 +207,8 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
         ),
         
         SwitchListTile(
-          title: Text('Register with System Tray'),
-          subtitle: Text('Add icon to system tray on desktop'),
+          title: const Text('Register with System Tray'),
+          subtitle: const Text('Add icon to system tray on desktop'),
           value: _config.registerWithSystemTray,
           onChanged: (value) {
             _updateConfig(_config.copyWith(registerWithSystemTray: value));
@@ -226,23 +226,23 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
       data: theme,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Server Configuration'),
+          title: const Text('Server Configuration'),
           actions: [
             if (widget.allowSave)
               IconButton(
-                icon: Icon(Icons.save),
+                icon: const Icon(Icons.save),
                 onPressed: _saveConfig,
                 tooltip: 'Save Configuration',
               ),
             IconButton(
-              icon: Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh),
               onPressed: _resetConfig,
               tooltip: 'Reset to Defaults',
             ),
           ],
         ),
         body: ListView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           children: [
             // Server information
             Card(
@@ -255,7 +255,7 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
                       'Server Information',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text('ID: ${widget.server.id}'),
                     Text('Name: ${widget.server.mcpServer.name}'),
                     Text('Version: ${widget.server.mcpServer.version}'),
@@ -265,14 +265,14 @@ class _FlutterMcpServerConfigWidgetState extends State<FlutterMcpServerConfigWid
               ),
             ),
             
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // Basic settings
             _buildBasicSettings(),
             
             // Advanced settings toggle
             SwitchListTile(
-              title: Text('Show Advanced Settings'),
+              title: const Text('Show Advanced Settings'),
               value: _showAdvancedSettings,
               onChanged: (value) {
                 setState(() {

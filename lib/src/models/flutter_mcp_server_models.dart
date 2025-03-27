@@ -3,7 +3,7 @@ import 'package:mcp_server/mcp_server.dart' as original;
 // Original types for convenience
 export 'package:mcp_server/mcp_server.dart' show
 JsonRpcMessage,
-LogLevel,
+McpLogLevel,
 ReadResourceResult,
 GetPromptResult,
 Message,

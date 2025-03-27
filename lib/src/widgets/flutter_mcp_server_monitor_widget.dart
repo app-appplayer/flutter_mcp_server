@@ -65,7 +65,7 @@ class FlutterMcpServerMonitorWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _FlutterMcpServerMonitorWidgetState createState() => _FlutterMcpServerMonitorWidgetState();
+  State<FlutterMcpServerMonitorWidget> createState() => _FlutterMcpServerMonitorWidgetState();
 }
 
 class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorWidget> {
@@ -73,7 +73,7 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
   ServerState _serverState = ServerState.stopped;
   
   /// Current resource stats
-  ServerResourceStats _resourceStats = ServerResourceStats();
+  ServerResourceStats _resourceStats = const ServerResourceStats();
   
   /// Timer for periodic updates
   Timer? _refreshTimer;
@@ -213,11 +213,13 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
       if (transport != null) {
         await widget.server.start(transport);
       } else {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('No transport available')),
         );
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to start server: $e')),
       );
@@ -229,6 +231,7 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
     try {
       await widget.server.stop();
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to stop server: $e')),
       );
@@ -277,7 +280,7 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Active connections:'),
+              const Text('Active connections:'),
               Text('${_resourceStats.activeConnections}'),
             ],
           ),
@@ -289,7 +292,7 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Requests processed:'),
+              const Text('Requests processed:'),
               Text('${_resourceStats.requestsProcessed}'),
             ],
           ),
@@ -336,7 +339,7 @@ class _FlutterMcpServerMonitorWidgetState extends State<FlutterMcpServerMonitorW
           LinearProgressIndicator(
             value: percentage,
             valueColor: AlwaysStoppedAnimation<Color>(color),
-            backgroundColor: color.withOpacity(0.2),
+            backgroundColor: color.withAlpha((0.2 * 255).round()),
           ),
         ],
       ),

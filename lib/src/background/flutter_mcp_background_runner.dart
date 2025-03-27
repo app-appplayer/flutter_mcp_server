@@ -209,7 +209,7 @@ class FlutterMcpBackgroundRunner {
       } else {
         // Process in main isolate (simpler but potentially blocking)
         // This is a placeholder implementation
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         task.setResult({'status': 'completed', 'message': 'Task executed'});
       }
     } catch (e) {
@@ -218,7 +218,7 @@ class FlutterMcpBackgroundRunner {
     
     // Process next task if any
     if (_taskQueue.isNotEmpty) {
-      _backgroundService.schedulePeriodicTask(Duration(seconds: 1), 'mcpBackgroundRunner');
+      _backgroundService.schedulePeriodicTask(const Duration(seconds: 1), 'mcpBackgroundRunner');
     }
   }
   
@@ -242,7 +242,7 @@ class FlutterMcpBackgroundRunner {
     
     // Start processing if not already running
     if (!_isProcessing) {
-      _backgroundService.schedulePeriodicTask(Duration(seconds: 1), 'mcpBackgroundRunner');
+      _backgroundService.schedulePeriodicTask(const Duration(seconds: 1), 'mcpBackgroundRunner');
     }
     
     return taskId;
@@ -374,7 +374,7 @@ void _isolateEntryPoint(dynamic message, SendPort sendPort) {
     final arguments = message['arguments'];
     
     // Simulate processing
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       // Send result back to main isolate
       sendPort.send({
         'taskId': taskId,

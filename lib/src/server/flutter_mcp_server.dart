@@ -89,7 +89,7 @@ class FlutterMcpServer with WidgetsBindingObserver {
   bool _isDisposed = false;
   
   /// Resource statistics for the server
-  ServerResourceStats _resourceStats = ServerResourceStats();
+  ServerResourceStats _resourceStats = const ServerResourceStats();
   
   /// Timer for resource stats updates
   Timer? _statsTimer;

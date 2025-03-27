@@ -49,7 +49,7 @@ class FlutterMcpServerConfig {
     this.useAndroidForegroundService = true,
     this.registerWithSystemTray = true,
   }) : 
-    requestHandlerTimeout = requestHandlerTimeout ?? Duration(seconds: defaultRequestHandlerTimeoutSeconds);
+    requestHandlerTimeout = requestHandlerTimeout ?? const Duration(seconds: defaultRequestHandlerTimeoutSeconds);
   
   /// Create a configuration with default values
   factory FlutterMcpServerConfig.defaults() {
